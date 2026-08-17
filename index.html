@@ -7,238 +7,14 @@
 <title>Barrio Sánguche — Nocturno</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0D0D0D;
-    --ink-soft:#171512;
-    --cream:#F5F0E6;
-    --hot:#FF4222;
-    --acid:#D4FF3F;
-    --olive:#3A3620;
-    --line: rgba(245,240,230,0.14);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  
-  /* Ajuste para la barra flotante en móvil */
-  body{
-    background:var(--ink);
-    color:var(--cream);
-    font-family:'Space Grotesk', sans-serif;
-    line-height:1.5;
-    overflow-x:hidden;
-    width: 100%;
-  }
-
-  h1,h2,h3,.display{
-    font-family:'Archivo Black', sans-serif;
-    text-transform:uppercase;
-    line-height:0.92;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit; text-decoration:none;}
-  
-  /* Espaciado ajustado para móviles primero */
-  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
-  section{padding:70px 0; overflow: hidden;}
-  ::selection{background:var(--acid); color:var(--ink);}
-
-  .dots{
-    background-image:radial-gradient(circle, rgba(245,240,230,0.16) 1px, transparent 1px);
-    background-size:16px 16px;
-  }
-
-  nav{position:sticky; top:0; z-index:50; background:rgba(13,13,13,0.95); backdrop-filter:blur(10px); border-bottom:2px solid var(--ink);}
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height: 70px;}
-  .logo{font-family:'Archivo Black',sans-serif; font-size:18px; text-transform:uppercase;}
-  .logo span{color:var(--hot);}
-  
-  /* Navegación de escritorio oculta por defecto en móviles */
-  .navlinks{display:none;}
-  .nav-cta{display:none;}
-  
-  /* Botón móvil */
-  .mobile-toggle { background: none; border: none; color: var(--cream); font-size: 28px; cursor: pointer; padding: 10px; margin-right: -10px;}
-
-  /* Menú desplegable móvil */
-  .mobile-menu {
-    display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; 
-    background: var(--ink); padding: 20px; border-bottom: 2px solid var(--line); text-align: center; gap: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-  .mobile-menu.active { display: flex; }
-  .mobile-menu a { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .mobile-menu a:active { color: var(--acid); }
-
-  .marquee{
-    background:var(--hot); color:var(--ink); overflow:hidden; white-space:nowrap;
-    border-bottom:2px solid var(--ink); border-top:2px solid var(--ink);
-    padding:8px 0;
-  }
-  .marquee-track{display:inline-block; animation:scroll 12s linear infinite;}
-  .marquee span{font-family:'Archivo Black',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:0.03em; margin-right:20px;}
-  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-
-  .hero{position:relative; padding-top:60px; padding-bottom:60px; text-align:center;}
-  .hero-bg-text{
-    position:absolute; top:45%; left:50%; transform:translate(-50%,-50%);
-    font-family:'Archivo Black',sans-serif; font-size:28vw; color:transparent;
-    -webkit-text-stroke:1px rgba(245,240,230,0.08); white-space:nowrap; pointer-events:none; z-index:0;
-  }
-  .hero-inner{position:relative; z-index:1;}
-  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--acid); margin-bottom:20px;}
-  .eyebrow::before{content:''; width:8px; height:8px; background:var(--acid); border-radius:50%;}
-  .hero h1{font-size:clamp(42px,12vw,124px); color:var(--cream);}
-  .hero h1 .out{-webkit-text-stroke:1.5px var(--cream); color:transparent; display:block;}
-  .hero h1 .fill{color:var(--hot);}
-  .hero p.lead{font-size:16px; opacity:0.8; max-width:460px; margin:20px auto 0; padding: 0 10px;}
-  
-  .hero-ctas{display:flex; flex-direction: column; gap:12px; margin-top:32px; padding: 0 20px;}
-  
-  .btn-primary, .btn-secondary {
-    padding: 16px 24px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; font-size:14px; text-align: center;
-    width: 100%; display: block;
-  }
-  .btn-primary{
-    background:var(--acid); color:var(--ink); transform:skewX(-6deg); transition:transform .15s;
-  }
-  .btn-primary span{display:inline-block; transform:skewX(6deg);}
-  .btn-secondary{
-    border:2px solid var(--cream); color:var(--cream);
-  }
-
-  .section-head{margin-bottom:40px; text-align:center;}
-  .section-head .tag{color:var(--acid); font-weight:700; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;}
-  .section-head h2{font-size:clamp(28px,8vw,64px); margin-top:10px;}
-  
-  /* GRID DE MENÚ: 1 columna en móvil */
-  .menu-grid{display:grid; grid-template-columns: 1fr; gap:20px;}
-  
-  /* Tarjetas limpias en móvil (sin rotación) */
-  .menu-item{
-    padding:20px; border:2px solid var(--ink); display: flex; flex-direction: column;
-    background: var(--ink-soft); /* Fondo por defecto para móvil si no se aplican los colores */
-  }
-  
-  /* Colores aplicados uniformemente sin rotar en móvil */
-  .menu-item:nth-child(6n+1){background:var(--acid); color:var(--ink);}
-  .menu-item:nth-child(6n+2){background:var(--hot); color:var(--ink);}
-  .menu-item:nth-child(6n+3){background:var(--cream); color:var(--ink);}
-  .menu-item:nth-child(6n+4){background:var(--olive); color:var(--cream);}
-  .menu-item:nth-child(6n+5){background:var(--cream); color:var(--ink);}
-  .menu-item:nth-child(6n+6){background:var(--acid); color:var(--ink);}
-  
-  .menu-img {
-    width: 100%;
-    aspect-ratio: 4/3; /* Mantiene la proporción sin deformarse */
-    object-fit: cover;
-    border: 2px solid var(--ink);
-    margin-bottom: 16px;
-    filter: grayscale(10%) contrast(110%);
-    background-color: var(--ink); /* Por si la imagen tarda en cargar */
-  }
-  
-  .menu-item .num{font-family:'Archivo Black',sans-serif; font-size:12px; letter-spacing:0.08em; opacity:0.6;}
-  .menu-item h3{font-size:22px; margin-top:6px;}
-  .menu-item p{font-size:14px; margin-top:8px; flex-grow: 1; opacity:0.85; line-height: 1.4;}
-  .menu-item .price{margin-top:16px; font-family:'Archivo Black',sans-serif; font-size:22px;}
-
-  .anatomy{background:var(--ink-soft); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);}
-  .anatomy-grid{display:grid; grid-template-columns: 1fr; gap:40px; text-align: center;}
-  .anatomy-list{display:flex; flex-direction:column; text-align: left;}
-  .anatomy-row{display:flex; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--line);}
-  .anatomy-row .swatch{width:16px; height:16px; flex-shrink:0;}
-  .anatomy-row .name{font-weight:700; font-size:15px; text-transform:uppercase; letter-spacing:0.02em;}
-  .anatomy-row .desc{display:none; /* Oculto en móviles para ahorrar espacio */}
-
-  .info-grid{display:grid; grid-template-columns: 1fr; gap:16px;}
-  .info-card{border:2px solid var(--line); padding:24px;}
-  .info-card .tag{color:var(--acid); font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;}
-  .info-card p{margin-top:10px; font-size:15px;}
-
-  .cta{background:var(--hot); color:var(--ink); text-align:center;}
-  .cta h2{font-size:clamp(30px,9vw,72px); color:var(--ink);}
-  .cta p{margin-top:12px; font-size:16px; opacity:0.85; padding: 0 10px;}
-  .cta .btn-primary{background:var(--ink); color:var(--cream); margin-top:24px; max-width: 300px; margin-left: auto; margin-right: auto;}
-
-  footer{padding:30px 0 100px 0; border-top:2px solid var(--line); text-align: center;}
-  footer .wrap{display:flex; flex-direction: column; gap:12px; font-size:12px; opacity:0.55; text-transform:uppercase; letter-spacing:0.04em;}
-
-  /* BARRA FLOTANTE MÓVIL (LA MEJOR HERRAMIENTA DE VENTAS) */
-  .mobile-sticky-cta {
-    position: fixed; bottom: 0; left: 0; width: 100%;
-    background: var(--ink); border-top: 2px solid var(--line);
-    padding: 16px 20px; z-index: 100;
-    display: flex; justify-content: center;
-    box-shadow: 0 -10px 20px rgba(0,0,0,0.5);
-  }
-  .mobile-sticky-cta .btn-primary {
-    width: 100%; margin: 0; padding: 14px; font-size: 15px;
-  }
-
-  .demo-badge { display: none; } /* Oculto en móvil para no molestar */
-
-  /* =========================================
-     ESCRITORIO (Pantallas grandes)
-     ========================================= */
-  @media(min-width: 768px) {
-    body { padding-bottom: 0; }
-    .mobile-toggle { display: none; }
-    .mobile-menu { display: none !important; }
-    .mobile-sticky-cta { display: none; }
-    
-    .navlinks{display:flex; gap:30px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; align-items: center;}
-    .navlinks a{opacity:0.7; transition:opacity .2s;}
-    .navlinks a:hover{opacity:1; color:var(--acid);}
-    .nav-cta{display:inline-block; background:var(--acid); color:var(--ink); padding:10px 20px; font-weight:700; text-transform:uppercase; font-size:12.5px; letter-spacing:0.05em; transform:skewX(-6deg);}
-    .nav-cta span{display:inline-block; transform:skewX(6deg);}
-    
-    .hero-ctas{flex-direction: row; justify-content: center;}
-    .btn-primary, .btn-secondary { width: auto; display: inline-block; }
-    
-    .menu-grid{grid-template-columns:repeat(3,1fr); gap:28px;}
-    
-    /* Vuelven las rotaciones con estilo en escritorio */
-    .menu-item{padding:26px; border:3px solid var(--ink); transition:transform .2s ease;}
-    .menu-item:hover{transform:translateY(-6px) rotate(0deg) !important;}
-    .menu-item:nth-child(6n+1){transform:rotate(-1.5deg);}
-    .menu-item:nth-child(6n+2){transform:rotate(1deg);}
-    .menu-item:nth-child(6n+3){transform:rotate(-1deg);}
-    .menu-item:nth-child(6n+4){transform:rotate(1.5deg);}
-    .menu-item:nth-child(6n+5){transform:rotate(0.8deg);}
-    .menu-item:nth-child(6n+6){transform:rotate(-0.8deg);}
-    
-    .anatomy-grid{grid-template-columns:0.85fr 1.15fr; gap:60px; text-align: left;}
-    .anatomy-row .desc{display:block; opacity:0.6; font-size:13.5px; margin-left:auto; text-align:right; max-width:220px;}
-    
-    .info-grid{grid-template-columns:repeat(3,1fr); gap:20px; margin-top:44px;}
-    footer{padding:44px 0;}
-    footer .wrap{flex-direction: row; justify-content:space-between;}
-
-    /* Badge visible solo en escritorio */
-    .demo-badge{
-      display: block; position:fixed; bottom:24px; right:24px; z-index:100; background:var(--ink); color:var(--cream);
-      padding:16px 20px; font-size:13.5px; font-weight:500; max-width:280px; border:2px solid var(--acid);
-      box-shadow: 4px 4px 0px var(--acid);
-    }
-    .demo-badge strong{display:block; font-family:'Archivo Black',sans-serif; color:var(--acid); font-size:15px; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.02em;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .marquee-track{animation:none;}
-    .menu-item{transition: none;}
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav>
   <div class="wrap">
     <div class="logo">Barrio<span>Sánguche</span></div>
-    
     <button class="mobile-toggle" aria-label="Abrir menú">☰</button>
-
-    <!-- Menú Escritorio -->
     <div class="navlinks">
       <a href="#menu">Menú</a>
       <a href="#anatomia">Ingredientes</a>
@@ -248,7 +24,6 @@
   </div>
 </nav>
 
-<!-- Menú Desplegable Móvil -->
 <div class="mobile-menu">
   <a href="#menu">Menú</a>
   <a href="#anatomia">Ingredientes</a>
@@ -264,6 +39,22 @@
 
 <section class="hero">
   <div class="hero-bg-text">SÁNGUCHE</div>
+
+  <div class="stamp" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <path id="stampCircle" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/>
+      </defs>
+      <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 5"/>
+      <text font-size="12.5" letter-spacing="2" fill="currentColor">
+        <textPath href="#stampCircle" startOffset="0%">★ HECHO EN EL BARRIO ★ DESDE 2019 ★ PAN DEL DÍA ★</textPath>
+      </text>
+      <circle cx="100" cy="100" r="34" fill="none" stroke="currentColor" stroke-width="2"/>
+      <text x="100" y="95" text-anchor="middle" font-size="20" fill="currentColor">100%</text>
+      <text x="100" y="114" text-anchor="middle" font-size="11" fill="currentColor" letter-spacing="1">BARRIO</text>
+    </svg>
+  </div>
+
   <div class="wrap hero-inner">
     <span class="eyebrow">Ñuñoa · desde 2019</span>
     <h1>
@@ -285,39 +76,55 @@
       <h2>Seis opciones,<br>ninguna de relleno.</h2>
     </div>
     <div class="menu-grid">
-      <!-- URLs DE UNSPLASH ACTUALIZADAS Y PROBADAS (MÁS ESTABLES) -->
-      
+
       <div class="menu-item">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Clásica" class="menu-img">
-        <div class="num">01</div><h3>El Clásico</h3><p>Churrasco, tomate, palta y mayo de la casa.</p><div class="price">$4.500</div>
+        <div class="menu-img-wrap">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Clásica" class="menu-img" loading="lazy">
+        </div>
+        <div class="num">01</div><h3>El Clásico</h3><p>Churrasco, tomate, palta y mayo de la casa.</p>
+        <span class="price">$4.500</span>
       </div>
-      
+
       <div class="menu-item">
-        <!-- Reemplazo para la hamburguesa doble rota -->
-        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Doble" class="menu-img">
-        <div class="num">02</div><h3>Barrio Doble</h3><p>Dos carnes, queso derretido, cebolla caramelizada.</p><div class="price">$6.200</div>
+        <div class="menu-img-wrap">
+          <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Doble" class="menu-img" loading="lazy">
+        </div>
+        <div class="num">02</div><h3>Barrio Doble</h3><p>Dos carnes, queso derretido, cebolla caramelizada.</p>
+        <span class="price">$6.200</span>
       </div>
-      
+
       <div class="menu-item">
-        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Picante" class="menu-img">
-        <div class="num">03</div><h3>El Picante</h3><p>Pollo mechado, jalapeños y salsa chipotle casera.</p><div class="price">$5.300</div>
+        <div class="menu-img-wrap">
+          <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Picante" class="menu-img" loading="lazy">
+        </div>
+        <div class="num">03</div><h3>El Picante</h3><p>Pollo mechado, jalapeños y salsa chipotle casera.</p>
+        <span class="price">$5.300</span>
       </div>
-      
+
       <div class="menu-item">
-        <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=600&q=80" alt="Sánguche Vegetariano" class="menu-img">
-        <div class="num">04</div><h3>Verde Barrio</h3><p>Champiñones a la plancha, pesto y queso de cabra.</p><div class="price">$5.000</div>
+        <div class="menu-img-wrap">
+          <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=600&q=80" alt="Sánguche Vegetariano" class="menu-img" loading="lazy">
+        </div>
+        <div class="num">04</div><h3>Verde Barrio</h3><p>Champiñones a la plancha, pesto y queso de cabra.</p>
+        <span class="price">$5.000</span>
       </div>
-      
+
       <div class="menu-item">
-        <!-- Reemplazo para las papas rotas -->
-        <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=600&q=80" alt="Papas fritas con queso" class="menu-img">
-        <div class="num">05</div><h3>Papas Barrio</h3><p>Papas fritas con cheddar, tocino y cebollín.</p><div class="price">$3.200</div>
+        <div class="menu-img-wrap">
+          <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=600&q=80" alt="Papas fritas con queso" class="menu-img" loading="lazy">
+        </div>
+        <div class="num">05</div><h3>Papas Barrio</h3><p>Papas fritas con cheddar, tocino y cebollín.</p>
+        <span class="price">$3.200</span>
       </div>
-      
+
       <div class="menu-item">
-        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Limonada natural" class="menu-img">
-        <div class="num">06</div><h3>Limonada casa</h3><p>Limonada natural con menta, hecha fresca cada día.</p><div class="price">$1.800</div>
+        <div class="menu-img-wrap">
+          <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Limonada natural" class="menu-img" loading="lazy">
+        </div>
+        <div class="num">06</div><h3>Limonada casa</h3><p>Limonada natural con menta, hecha fresca cada día.</p>
+        <span class="price">$1.800</span>
       </div>
+
     </div>
   </div>
 </section>
@@ -325,9 +132,9 @@
 <section class="anatomy" id="anatomia">
   <div class="wrap anatomy-grid">
     <div>
-      <span class="tag" style="color:var(--acid); font-weight:700; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;">Sin trucos</span>
-      <h2 style="font-size:clamp(26px,7vw,50px); margin-top:10px;">Lo que lleva cada capa</h2>
-      <p style="opacity:0.65; margin-top:16px; margin-bottom: 20px;">Todo se compra en la feria y la carnicería del barrio, cada mañana.</p>
+      <span class="tag">Sin trucos</span>
+      <h2 class="anatomy-title">Lo que lleva cada capa</h2>
+      <p class="anatomy-copy">Todo se compra en la feria y la carnicería del barrio, cada mañana.</p>
     </div>
     <div class="anatomy-list">
       <div class="anatomy-row"><div class="swatch" style="background:var(--acid);"></div><div class="name">Pan amasado</div><div class="desc">Horneado a las 7am en el local</div></div>
@@ -342,19 +149,19 @@
 <section class="reviews">
   <div class="wrap">
     <div class="section-head">
-      <span class="tag">La Calle Habla</span>
+      <span class="tag">La calle habla</span>
       <h2>Lo que dicen<br>nuestros clientes</h2>
     </div>
     <div class="info-grid">
       <div class="info-card">
-        <p style="font-size: 20px; color: var(--hot); margin-top:0; letter-spacing: 2px;">★★★★★</p>
+        <p class="stars">★★★★★</p>
         <p>"La mejor hamburguesa de Ñuñoa, sin dudas. El pan amasado hace toda la diferencia."</p>
-        <p class="tag" style="margin-top: 15px;">- Carlos M.</p>
+        <p class="tag review-author">— Carlos M.</p>
       </div>
       <div class="info-card">
-        <p style="font-size: 20px; color: var(--hot); margin-top:0; letter-spacing: 2px;">★★★★★</p>
+        <p class="stars">★★★★★</p>
         <p>"Pedimos por WhatsApp y llegó caliente y perfecto. Las papas barrio son una locura."</p>
-        <p class="tag" style="margin-top: 15px;">- Andrea V.</p>
+        <p class="tag review-author">— Andrea V.</p>
       </div>
     </div>
   </div>
@@ -389,40 +196,16 @@
   </div>
 </footer>
 
-<!-- BARRA FLOTANTE MÓVIL (Gran herramienta de conversión) -->
 <div class="mobile-sticky-cta">
   <a class="btn-primary" href="#"><span>Pedir por WhatsApp</span></a>
 </div>
 
 <div class="demo-badge">
   <strong>¿Te gusta este diseño?</strong>
-  Soy desarrollador web y hago páginas que traen clientes a tu local. <br>
-  <a href="#" style="text-decoration: underline; color: var(--hot); font-weight: bold; margin-top: 8px; display: inline-block;">Hablemos por WhatsApp</a>
+  Soy desarrollador web y hago páginas que traen clientes a tu local.<br>
+  <a href="#" class="demo-badge-link">Hablemos por WhatsApp</a>
 </div>
 
-<script>
-  // Lógica del menú móvil
-  const toggleBtn = document.querySelector('.mobile-toggle');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  
-  toggleBtn.addEventListener('click', function() {
-    mobileMenu.classList.toggle('active');
-    // Cambiar ícono de hamburguesa a "X"
-    if(mobileMenu.classList.contains('active')) {
-      toggleBtn.innerHTML = '✕';
-    } else {
-      toggleBtn.innerHTML = '☰';
-    }
-  });
-
-  // Cerrar el menú al hacer clic en un enlace
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('active');
-      toggleBtn.innerHTML = '☰';
-    });
-  });
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
