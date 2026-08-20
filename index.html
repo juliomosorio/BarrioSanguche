@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="description" content="Demo de sitio web para restaurantes. Diseño optimizado para celulares y pedidos por WhatsApp.">
 <title>Barrio Sánguche — Nocturno</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -56,7 +58,10 @@
   </div>
 
   <div class="wrap hero-inner">
-    <span class="eyebrow">Ñuñoa · desde 2019</span>
+    <div class="hero-badges">
+      <span class="eyebrow">Ñuñoa · desde 2019</span>
+      <span class="status-pill" id="statusPill"><span class="status-dot" id="statusDot"></span><span id="statusText">Abierto ahora</span></span>
+    </div>
     <h1>
       <span class="out">Come</span>
       <span class="fill">como la gente</span>
@@ -66,6 +71,28 @@
       <a class="btn-primary" href="#pedir"><span>Pedir por WhatsApp</span></a>
       <a class="btn-secondary" href="#menu">Ver menú</a>
     </div>
+    <div class="hero-note">🛵 Delivery gratis sobre $15.000 · Retiro en 10 min</div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat-item">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Años en el barrio</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">15K+</span>
+      <span class="stat-label">Sánguches servidos</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">20</span>
+      <span class="stat-label">Min. entrega prom.</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">4.9</span>
+      <span class="stat-label">★ Calificación clientes</span>
+    </div>
   </div>
 </section>
 
@@ -74,55 +101,99 @@
     <div class="section-head">
       <span class="tag">La carta</span>
       <h2>Seis opciones,<br>ninguna de relleno.</h2>
+      <p class="menu-hint">Arma tu pedido con los botones y mándalo directo por WhatsApp.</p>
     </div>
     <div class="menu-grid">
 
-      <div class="menu-item">
+      <div class="menu-item" data-name="El Clásico" data-price="4500">
         <div class="menu-img-wrap">
           <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Clásica" class="menu-img" loading="lazy">
         </div>
         <div class="num">01</div><h3>El Clásico</h3><p>Churrasco, tomate, palta y mayo de la casa.</p>
-        <span class="price">$4.500</span>
+        <div class="qty-row">
+          <span class="price">$4.500</span>
+          <div class="stepper">
+            <button class="qty-btn minus" aria-label="Quitar El Clásico">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-btn plus" aria-label="Agregar El Clásico">+</button>
+          </div>
+        </div>
       </div>
 
-      <div class="menu-item">
+      <div class="menu-item" data-name="Barrio Doble" data-price="6200">
         <div class="menu-img-wrap">
+          <span class="badge-best">Más pedido</span>
           <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Doble" class="menu-img" loading="lazy">
         </div>
         <div class="num">02</div><h3>Barrio Doble</h3><p>Dos carnes, queso derretido, cebolla caramelizada.</p>
-        <span class="price">$6.200</span>
+        <div class="qty-row">
+          <span class="price">$6.200</span>
+          <div class="stepper">
+            <button class="qty-btn minus" aria-label="Quitar Barrio Doble">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-btn plus" aria-label="Agregar Barrio Doble">+</button>
+          </div>
+        </div>
       </div>
 
-      <div class="menu-item">
+      <div class="menu-item" data-name="El Picante" data-price="5300">
         <div class="menu-img-wrap">
           <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Picante" class="menu-img" loading="lazy">
         </div>
         <div class="num">03</div><h3>El Picante</h3><p>Pollo mechado, jalapeños y salsa chipotle casera.</p>
-        <span class="price">$5.300</span>
+        <div class="qty-row">
+          <span class="price">$5.300</span>
+          <div class="stepper">
+            <button class="qty-btn minus" aria-label="Quitar El Picante">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-btn plus" aria-label="Agregar El Picante">+</button>
+          </div>
+        </div>
       </div>
 
-      <div class="menu-item">
+      <div class="menu-item" data-name="Verde Barrio" data-price="5000">
         <div class="menu-img-wrap">
           <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=600&q=80" alt="Sánguche Vegetariano" class="menu-img" loading="lazy">
         </div>
         <div class="num">04</div><h3>Verde Barrio</h3><p>Champiñones a la plancha, pesto y queso de cabra.</p>
-        <span class="price">$5.000</span>
+        <div class="qty-row">
+          <span class="price">$5.000</span>
+          <div class="stepper">
+            <button class="qty-btn minus" aria-label="Quitar Verde Barrio">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-btn plus" aria-label="Agregar Verde Barrio">+</button>
+          </div>
+        </div>
       </div>
 
-      <div class="menu-item">
+      <div class="menu-item" data-name="Papas Barrio" data-price="3200">
         <div class="menu-img-wrap">
           <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=600&q=80" alt="Papas fritas con queso" class="menu-img" loading="lazy">
         </div>
         <div class="num">05</div><h3>Papas Barrio</h3><p>Papas fritas con cheddar, tocino y cebollín.</p>
-        <span class="price">$3.200</span>
+        <div class="qty-row">
+          <span class="price">$3.200</span>
+          <div class="stepper">
+            <button class="qty-btn minus" aria-label="Quitar Papas Barrio">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-btn plus" aria-label="Agregar Papas Barrio">+</button>
+          </div>
+        </div>
       </div>
 
-      <div class="menu-item">
+      <div class="menu-item" data-name="Limonada casa" data-price="1800">
         <div class="menu-img-wrap">
           <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Limonada natural" class="menu-img" loading="lazy">
         </div>
         <div class="num">06</div><h3>Limonada casa</h3><p>Limonada natural con menta, hecha fresca cada día.</p>
-        <span class="price">$1.800</span>
+        <div class="qty-row">
+          <span class="price">$1.800</span>
+          <div class="stepper">
+            <button class="qty-btn minus" aria-label="Quitar Limonada casa">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-btn plus" aria-label="Agregar Limonada casa">+</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -167,6 +238,33 @@
   </div>
 </section>
 
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Antes de pedir</span>
+      <h2>Preguntas<br>frecuentes</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>¿Hacen despacho a domicilio?<span class="faq-icon">+</span></summary>
+        <p>Sí, delivery propio en Ñuñoa y comunas cercanas. Gratis en pedidos sobre $15.000; si no, el costo se calcula según distancia al confirmar por WhatsApp.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué medios de pago aceptan?<span class="faq-icon">+</span></summary>
+        <p>Efectivo, débito, crédito y transferencia. En el local y también al recibir tu pedido a domicilio.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Tienen opciones vegetarianas?<span class="faq-icon">+</span></summary>
+        <p>Sí, el Verde Barrio es 100% vegetariano. Avísanos por WhatsApp si tienes otra restricción y lo vemos.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo reservar una mesa?<span class="faq-icon">+</span></summary>
+        <p>El local es chico y funciona por orden de llegada, pero para grupos de 6 o más escríbenos antes y te guardamos espacio.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="ubicacion">
   <div class="wrap">
     <div class="section-head">
@@ -178,6 +276,13 @@
       <div class="info-card"><div class="tag">Horario</div><p>Mar a Dom<br>12:30 – 22:00 hrs</p></div>
       <div class="info-card"><div class="tag">Contacto</div><p>+56 9 1234 5678<br>@barriosanguche</p></div>
     </div>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps?q=Av.+Irarr%C3%A1zaval+1234,+%C3%91u%C3%B1oa,+Santiago&output=embed"
+        width="100%" height="320" style="border:0;" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" title="Ubicación Barrio Sánguche">
+      </iframe>
+    </div>
   </div>
 </section>
 
@@ -186,6 +291,7 @@
     <h2>¿Con hambre?</h2>
     <p>Escríbenos y te lo tenemos listo en 20 minutos.</p>
     <a class="btn-primary" href="#"><span>Pedir por WhatsApp →</span></a>
+    <button id="shareBtn" class="share-link">Compartir con un amigo con hambre →</button>
   </div>
 </section>
 
@@ -196,8 +302,11 @@
   </div>
 </footer>
 
-<div class="mobile-sticky-cta">
-  <a class="btn-primary" href="#"><span>Pedir por WhatsApp</span></a>
+<div class="cart-bar" id="cartBar">
+  <div class="wrap cart-bar-inner">
+    <span class="cart-info"><strong id="cartCount">0</strong> productos · <span id="cartTotal">$0</span></span>
+    <button class="btn-primary cart-send" id="cartSend"><span>Enviar pedido →</span></button>
+  </div>
 </div>
 
 <div class="demo-badge">
